@@ -226,7 +226,7 @@ void ngx_log_init()
     ngx_log.fd = open((const char *)plogname,O_WRONLY|O_APPEND|O_CREAT,0644);  
     if (ngx_log.fd == -1)  //如果有错误，则直接定位到 标准错误上去 
     {
-        ngx_log_stderr(errno,"[alert] could not open error log file: open() \"%s\" failed", plogname);
+        ngx_log_stderr(errno,"[alert] could not open error log file: open() \"%s\" failed", plogname); // errno 是一个全局变量，它保存了最近一次系统调用出错的错误码。在 C 标准库和 POSIX 标准中，errno 是一个整型的全局变量（定义在 <errno.h> 头文件中），并不需要在代码中显式声明。
         ngx_log.fd = STDERR_FILENO; //直接定位到标准错误去了        
     } 
     return;
